@@ -13,6 +13,8 @@ class ItensMonitoramentoView extends View {
                     <th>Número</th>
                     <th>UO</th>
                     <th>Data</th>
+                    <th>Despacho</th>
+                    <th>Oficio Defesa</th>
                 </tr>
             </thead>
         
@@ -23,14 +25,30 @@ class ItensMonitoramentoView extends View {
                         <td>${n.numero}</td>
                         <td>${n.idUoInss}</td>
                         <td>${DateHelper.dataParaTexto(n.data)}</td>
+                        <td>
+                            <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.gerarDespacho(${n.id})">
+                                Gerar
+                            </button>
+                            <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.downloadDocumento(${n.id})">
+                                Download
+                            </button>                        
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.gerarOficioDefesa(${n.id})">
+                                Gerar
+                            </button>
+                            <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.downloadDocumento(${n.id})">
+                                Download
+                            </button>                        
+                        </td>
                     </tr>
                     
                 `).join('')}                
             </tbody>
                   
             <tfoot>
-                <td colspan="3">
-                    ${model.itensMonitoramento.reduce((total, n) => total + 1, 0.0)}
+                <td colspan="5" align="center">
+                    ${model.itensMonitoramento.reduce((total, n) => total + 1, 0.0)} itens
                 </td>
             </tfoot>
             
