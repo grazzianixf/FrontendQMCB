@@ -29,8 +29,7 @@ class ItensMonitoramentoView extends View {
             </tbody>
                   
             <tfoot>
-                <td colspan="3"></td>
-                <td>
+                <td colspan="3">
                     ${model.itensMonitoramento.reduce((total, n) => total + 1, 0.0)}
                 </td>
             </tfoot>

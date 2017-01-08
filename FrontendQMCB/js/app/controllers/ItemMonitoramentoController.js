@@ -6,8 +6,8 @@ class ItemMonitoramentoController {
 
         this._listaItensMonitoramento = new ListaItensMonitoramento();
         
-        this._negociacoesView = new NegociacoesView($('#negociacoesView'));
-        this._negociacoesView.update(this._listaItensMonitoramento);
+        this._itensMonitoramentoView = new ItensMonitoramentoView($('#itensMonitoramentoView'));
+        this._itensMonitoramentoView.update(this._listaItensMonitoramento);
         
         this._mensagem = new Mensagem();
         this._mensagemView = new MensagemView($('#mensagemView'));
@@ -18,18 +18,22 @@ class ItemMonitoramentoController {
     adiciona(event) {
         
         event.preventDefault();
-        this._listaItensMonitoramento.adiciona(this._criaNegociacao());
-        this._negociacoesView.update(this._listaItensMonitoramento);
+        this._listaItensMonitoramento.adiciona(this._criaItemMonitoramento());
+        this._itensMonitoramentoView.update(this._listaItensMonitoramento);
         
         this._mensagem.texto = 'Item de Monitoramento adicionado com sucesso';
         this._mensagemView.update(this._mensagem);   
     }
     
-    _criaNegociacao() {
+    _criaItemMonitoramento() {
         
-        return new Negociacao(
+        return new ItemMonitoramento(
             DateHelper.textoParaData(this._inputData.value),
             this._inputQuantidade.value,
             this._inputValor.value);    
+    }
+
+    atualizarItens(event) {
+        
     }
 }
