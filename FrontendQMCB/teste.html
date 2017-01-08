@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Titulo</h2>
+  <p>descricao
+  <div class="table-responsive">          
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Ação</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Despacho Instauração</td>
+          <td>
+            <button onclick="executarDespachoInstauracao()">Executar</button>
+          </td>
+          <td id="tdResultado1"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  /* function executarDespachoInstauracao() {
+      var tdResultado1 = document.querySelector("#tdResultado1");
+      tdResultado1.innerHTML = "Processando...";
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", "http://demo7424473.mockable.io/ServicesQMCB/documentos/despachoInstauracao", false);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send();
+
+      var response = JSON.parse(xhttp.responseText);
+      
+      tdResultado1.innerHTML = xhttp.responseText;
+  }  */
+  function executarDespachoInstauracao() {
+    var tdResultado1 = document.querySelector("#tdResultado1");
+    tdResultado1.innerHTML = "Processando...";
+
+    var ajax = new XMLHttpRequest();
+    ajax.onload = functionName;
+    ajax.onerror = errorFunctionName;
+    ajax.open("POST", "http://demo7424473.mockable.io/ServicesQMCB/documentos/despachoInstauracao", true);
+    ajax.send();
+
+    function functionName() {
+        console.log(this); // log the response
+        if (this.status == 200) { // request succeeded
+            // do something with this.responseText;
+            tdResultado1.innerHTML = "Resultado: " + this.responseText;
+        } else {
+            // handle more HTTP response codes here;
+            tdResultado1.innerHTML = "Resultado: statusCode = " + this.status;
+        }
+    }
+
+    function errorFunctionName(e) {
+      tdResultado1.innerHTML = "Resultado: Erro = " + e;
+
+        console.log(this);
+        console.error(e);
+        // do something with this.status, this.statusText
+    }  
+  }
+</script>
+</body>
+</html>
