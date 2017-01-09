@@ -75,11 +75,13 @@ class ItemMonitoramentoController {
     }
 
     gerarDespacho(idItem) {
+        let params = "id=" + idItem;
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = errorFunctionName;
-        ajax.open("POST", "http://demo7424473.mockable.io/ServicesQMCB/documentos/despachoInstauracao", true);
-        ajax.send();
+        ajax.open("POST", "http://localhost:8080/ServicesQMCB/documentos/despachoInstauracao", true);
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        ajax.send(params);
 
         this._atualizaMensagem('Gerando despacho ...');
 
@@ -96,6 +98,7 @@ class ItemMonitoramentoController {
                 that._atualizaMensagem('');
             } else {
                 // handle more HTTP response codes here;
+                console.log(this.responseText);
                 console.log("Resultado: statusCode = " + this.status);
             }
         }
@@ -143,10 +146,11 @@ class ItemMonitoramentoController {
     }
 
     downloadDocumento(id) {
-         let ajax = new XMLHttpRequest();
+        //TODO Browser deve ter instalado uma extensão que permita cross-domain, senao n funciona
+        let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = errorFunctionName;
-        ajax.open("GET", "http://demo7424473.mockable.io/ServicesQMCB/documentos/" + id, true);
+        ajax.open("GET", "http://localhost:8080/ServicesQMCB/documentos/despachoInstauracao/" + id, true);
         ajax.send();
 
         this._atualizaMensagem('Download ...');
@@ -154,25 +158,28 @@ class ItemMonitoramentoController {
         var that = this;
         function functionName() {
             
-            if (this.status == 200) { // request succeeded
+            if (this.status == 200) {
+                //console.log(this.responseText);
                 
-                let json = JSON.parse(this.responseText);
-                console.log(json);
-
-                // TODO 
+                that._downloadArquivo(this.responseText, 'documento.pdf')
 
                 that._atualizaMensagem('');
             } else {
-                // handle more HTTP response codes here;
                 console.log("Resultado: statusCode = " + this.status);
             }
         }
 
-        function errorFunctionName(e) {
-            
+        function errorFunctionName(e) {          
             console.log(this);
             console.error(e);
-            // do something with this.status, this.statusText
         }               
     }
+
+    _downloadArquivo(content, filename) {
+        let a = document.createElement('a');
+        let blob = new Blob([content], {'type':'application/octet-stream'});
+        a.href = window.URL.createObjectURL(blob);
+        a.download = filename;
+        a.click();   
+    }    
 }
