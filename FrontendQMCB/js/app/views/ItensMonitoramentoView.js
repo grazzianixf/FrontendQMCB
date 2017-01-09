@@ -29,17 +29,13 @@ class ItensMonitoramentoView extends View {
                             <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.gerarDespacho(${n.id})">
                                 Gerar
                             </button>
-                            <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.downloadDocumento(${n.id})">
-                                Download
-                            </button>                        
+                            <div id="despachoView${n.id}"></div>
                         </td>
                         <td>
                             <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.gerarOficioDefesa(${n.id})">
                                 Gerar
                             </button>
-                            <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.downloadDocumento(30)">
-                                Download
-                            </button>                        
+                            <div id="oficioDefesaView${n.id}"></div>
                         </td>
                     </tr>
                     
