@@ -104,11 +104,12 @@ class ItemMonitoramentoController {
     gerarOficioDefesa(idItem) {
         var that = this;
 
+        let params = "id=" + idItem;
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = that._errorCallBackFunction;
-        ajax.open("POST", "http://demo7424473.mockable.io/ServicesQMCB/documentos/oficioDefesa", true);
-        ajax.send();
+        ajax.open("POST", "http://localhost:8080/ServicesQMCB/documentos/oficioDefesa", true);
+        ajax.send(params);
 
         this._atualizaMensagem('Gerando ofício de defesa ...');
 
