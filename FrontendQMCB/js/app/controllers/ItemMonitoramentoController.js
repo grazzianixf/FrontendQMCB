@@ -20,11 +20,11 @@ class ItemMonitoramentoController {
     }
     
     _criaItemMonitoramento(itemArray) {
-        
-        return new ItemMonitoramento(itemArray.id,
-            DateHelper.textoParaData(itemArray.data),
-            itemArray.numero,
-            itemArray.idUoInss);    
+        console.log(itemArray);
+        return new ItemMonitoramento(itemArray[0],
+            new Date(),
+            itemArray[2],
+            itemArray[3]);  
     }
 
     _errorCallBackFunction(e) {
@@ -38,7 +38,8 @@ class ItemMonitoramentoController {
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = that._errorCallBackFunction;
-        ajax.open("GET", "http://demo7424473.mockable.io/ServicesQMCB/itensMonitoramento", true);
+        //ajax.open("GET", "http://demo7424473.mockable.io/ServicesQMCB/itensMonitoramento", true);
+        ajax.open("GET", "http://localhost:8080/ServicesQMCB/itensMonitoramento", true);
         ajax.send();
 
         this._atualizaMensagem('Pesquisando itens ...');
@@ -46,11 +47,11 @@ class ItemMonitoramentoController {
         function functionName() {
             
             if (this.status == 200) { // request succeeded
-                
+                console.log(this.responseText);
                 let json = JSON.parse(this.responseText);
                 console.log(json);
 
-                json.itensMonitoramento.forEach(itemArray => {
+                json.forEach(itemArray => {
                     that._listaItensMonitoramento.adiciona(that._criaItemMonitoramento(itemArray));
                 }, that);
                 that._itensMonitoramentoView.update(that._listaItensMonitoramento);
@@ -109,6 +110,7 @@ class ItemMonitoramentoController {
         ajax.onload = functionName;
         ajax.onerror = that._errorCallBackFunction;
         ajax.open("POST", "http://localhost:8080/ServicesQMCB/documentos/oficioDefesa", true);
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         ajax.send(params);
 
         this._atualizaMensagem('Gerando ofício de defesa ...');
