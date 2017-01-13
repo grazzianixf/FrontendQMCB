@@ -21,10 +21,10 @@ class ItemMonitoramentoController {
     
     _criaItemMonitoramento(itemArray) {
         console.log(itemArray);
-        return new ItemMonitoramento(itemArray[0],
+        return new ItemMonitoramento(itemArray.id,
             new Date(),
-            itemArray[2],
-            itemArray[3]);  
+            itemArray.numero,
+            itemArray.idUOMantenedora);  
     }
 
     _errorCallBackFunction(e) {
@@ -38,8 +38,7 @@ class ItemMonitoramentoController {
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = that._errorCallBackFunction;
-        //ajax.open("GET", "http://demo7424473.mockable.io/ServicesQMCB/itensMonitoramento", true);
-        ajax.open("GET", "http://localhost:8080/ServicesQMCB/itensMonitoramento", true);
+        ajax.open("GET", "http://localhost:8080/ServicesQMCB/itensMonitoramento", true); //Habilitar Corss no navegador
         ajax.send();
 
         this._atualizaMensagem('Pesquisando itens ...');
