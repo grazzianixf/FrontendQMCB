@@ -6,6 +6,6 @@ class DocumentoView extends View {
     
    template(model) {
        
-       return `<a href='http://localhost:8080/ServicesQMCB/documentos/${model.id}'>Download</a>`;
+       return `<a href='http://localhost:8080/ServicesQMCB/documentos/${model.id}/bytes'>Download</a>`;
    }
 }

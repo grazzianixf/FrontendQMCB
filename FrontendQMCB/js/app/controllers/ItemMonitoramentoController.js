@@ -24,7 +24,7 @@ class ItemMonitoramentoController {
         return new ItemMonitoramento(itemArray.id,
             new Date(),
             itemArray.numero,
-            itemArray.idUOMantenedora);  
+            itemArray.idUOMonitoramento);  
     }
 
     _errorCallBackFunction(e) {
@@ -105,6 +105,7 @@ class ItemMonitoramentoController {
         var that = this;
 
         let params = "id=" + idItem;
+        console.log(params);
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = that._errorCallBackFunction;
