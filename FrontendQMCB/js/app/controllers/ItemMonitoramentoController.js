@@ -1,6 +1,8 @@
 class ItemMonitoramentoController {
     
     constructor() {
+
+        var context = this;
         
         let $ = document.querySelector.bind(document);
 
@@ -14,8 +16,9 @@ class ItemMonitoramentoController {
         this._mensagemView.update(this._mensagem);
     }
     
-    _atualizaMensagem(texto) {
+    _atualizaMensagem(texto, tipo) {
         this._mensagem.texto = texto;
+        this._mensagem.tipo = tipo;
         this._mensagemView.update(this._mensagem);           
     }
     
@@ -27,9 +30,10 @@ class ItemMonitoramentoController {
             itemArray.idUOMonitoramento);  
     }
 
-    _errorCallBackFunction(e) {
+    _errorCallBackFunction(e, o) {
         console.log(this);
         console.error(e);
+        itemMonitoramentoController._atualizaMensagem("Erro ao processar requisição... Veja mais detalhes no log do console (Ctrl + Shift + J)", 4);
     }
 
     atualizarItens(event) {
@@ -37,10 +41,10 @@ class ItemMonitoramentoController {
 
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
-        ajax.onerror = that._errorCallBackFunction;
+        ajax.onerror = this._errorCallBackFunction;
         ajax.open("GET", "http://localhost:8080/ServicesQMCB/itensMonitoramento", true); //Habilitar Corss no navegador
         ajax.send();
-
+        
         this._atualizaMensagem('Pesquisando itens ...');
 
         function functionName() {

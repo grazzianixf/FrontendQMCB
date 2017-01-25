@@ -1,8 +1,9 @@
 class Mensagem {
     
-    constructor(texto='') {
-        
+    constructor(texto='', tipo=2) {
+        // tipo : 1 = success, 2 = info, 3 = warn, 4 = danger
         this._texto = texto;
+        this._tipo = tipo;
     }
     
     get texto() {
@@ -14,4 +15,14 @@ class Mensagem {
         
         this._texto = texto;
     }
+
+    get tipo() {
+        
+        return this._tipo;
+    }
+    
+    set tipo(tipo) {
+        
+        this._tipo = tipo;
+    }    
 }
