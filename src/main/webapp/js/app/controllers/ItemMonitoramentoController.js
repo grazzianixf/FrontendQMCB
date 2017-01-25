@@ -1,7 +1,7 @@
 class ItemMonitoramentoController {
-    
-    constructor() {
 
+	
+    constructor() {
         var context = this;
         
         let $ = document.querySelector.bind(document);
@@ -42,7 +42,7 @@ class ItemMonitoramentoController {
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = this._errorCallBackFunction;
-        ajax.open("GET", "http://localhost:8080/ServicesQMCB/itensMonitoramento", true); //Habilitar Corss no navegador
+        ajax.open("GET", URL_WEBSERVICE + "/itensMonitoramento", true); //Habilitar Corss no navegador
         ajax.send();
         
         this._atualizaMensagem('Pesquisando itens ...', 2);
@@ -83,11 +83,11 @@ class ItemMonitoramentoController {
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = that._errorCallBackFunction;
-        ajax.open("POST", "http://localhost:8080/ServicesQMCB/documentos/despachoInstauracao", true);
+        ajax.open("POST", URL_WEBSERVICE + "/documentos/despachoInstauracao", true);
         ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         ajax.send(params);
 
-        this._atualizaMensagem('Gerando despacho ...');
+        this._atualizaMensagem('Gerando despacho ...', 2);
 
         function functionName() {
             
@@ -98,7 +98,7 @@ class ItemMonitoramentoController {
 
                 that._atualizaDocumentoView(json, "despachoView" + idItem);
 
-                that._atualizaMensagem('');
+                that._atualizaMensagem('Despacho de Instauração gerado. Clique em download para visualizá-lo!', 1);
             } else {
                 console.log(this.responseText);
                 console.log("Resultado: statusCode = " + this.status);
@@ -114,11 +114,11 @@ class ItemMonitoramentoController {
         let ajax = new XMLHttpRequest();
         ajax.onload = functionName;
         ajax.onerror = that._errorCallBackFunction;
-        ajax.open("POST", "http://localhost:8080/ServicesQMCB/documentos/oficioDefesa", true);
+        ajax.open("POST", URL_WEBSERVICE + "/documentos/oficioDefesa", true);
         ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         ajax.send(params);
 
-        this._atualizaMensagem('Gerando ofício de defesa ...');
+        this._atualizaMensagem('Gerando ofício de defesa ...', 2);
 
         function functionName() {
             
@@ -129,7 +129,7 @@ class ItemMonitoramentoController {
 
                 that._atualizaDocumentoView(json, "oficioDefesaView" + idItem);
 
-                that._atualizaMensagem('');
+                that._atualizaMensagem('Ofício de Defesa gerado. Clique em download para visualizá-lo!', 1);
             } else {
                 console.log("Resultado: statusCode = " + this.status);
             }
