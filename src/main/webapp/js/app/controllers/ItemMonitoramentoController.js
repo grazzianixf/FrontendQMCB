@@ -45,7 +45,7 @@ class ItemMonitoramentoController {
         ajax.open("GET", "http://localhost:8080/ServicesQMCB/itensMonitoramento", true); //Habilitar Corss no navegador
         ajax.send();
         
-        this._atualizaMensagem('Pesquisando itens ...');
+        this._atualizaMensagem('Pesquisando itens ...', 2);
 
         function functionName() {
             
@@ -63,6 +63,7 @@ class ItemMonitoramentoController {
                 that._atualizaMensagem('');
             } else {
                 console.log("Resultado: statusCode = " + this.status);
+                that._atualizaMensagem(`Erro do servidor: (${this.status}) ${this.statusText}`, 4);
             }
         }      
     }
