@@ -102,6 +102,7 @@ class ItemMonitoramentoController {
             } else {
                 console.log(this.responseText);
                 console.log("Resultado: statusCode = " + this.status);
+                that._atualizaMensagem(`Erro do servidor: (${this.status}) ${this.statusText}. ${this.responseText}`, 4);
             }
         }       
     }
@@ -132,6 +133,7 @@ class ItemMonitoramentoController {
                 that._atualizaMensagem('Ofício de Defesa gerado. Clique em download para visualizá-lo!', 1);
             } else {
                 console.log("Resultado: statusCode = " + this.status);
+                that._atualizaMensagem(`Erro do servidor: (${this.status}) ${this.statusText}. ${this.responseText}`, 4);
             }
         }      
     }
