@@ -40,7 +40,7 @@ class ItensMonitoramentoView extends View {
                             <div id="oficioDefesaView${n.id}"></div>
                         </td>
                         <td>
-                            <button disabled class="btn btn-secondary text-center" onclick="itemMonitoramentoController.gerarOficioRegularidade(${n.id})">
+                            <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.gerarOficioRegularidade(${n.id})">
                                 Gerar
                             </button>
                             <div id="oficioRegularidadeView${n.id}"></div>

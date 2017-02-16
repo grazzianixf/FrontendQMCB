@@ -168,4 +168,35 @@ class ItemMonitoramentoController {
             }
         }      
     }    
+    
+    gerarOficioRegularidade(idItem) {
+        var that = this;
+
+        let params = "id=" + idItem;
+        console.log(params);
+        let ajax = new XMLHttpRequest();
+        ajax.onload = functionName;
+        ajax.onerror = that._errorCallBackFunction;
+        ajax.open("POST", URL_WEBSERVICE + "/documentos/oficioRegularidade", true);
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        ajax.send(params);
+
+        this._atualizaMensagem('Gerando ofício de regularidade ...', 2);
+
+        function functionName() {
+            
+            if (this.status == 200) {
+                
+                let json = JSON.parse(this.responseText);
+                console.log(json);
+
+                that._atualizaDocumentoView(json, "oficioRegularidadeView" + idItem);
+
+                that._atualizaMensagem('Ofício de Regularidade gerado. Clique em download para visualizá-lo!', 1);
+            } else {
+                console.log("Resultado: statusCode = " + this.status);
+                that._atualizaMensagem(`Erro do servidor: (${this.status}) ${this.statusText}. ${this.responseText}`, 4);
+            }
+        }      
+    }    
 }
