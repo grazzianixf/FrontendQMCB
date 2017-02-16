@@ -15,6 +15,8 @@ class ItensMonitoramentoView extends View {
                     <th>Data</th>
                     <th>Despacho</th>
                     <th>Oficio Defesa</th>
+                    <th>Oficio Regularidade</th>
+                    <th>Relatório Regularidade</th>
                 </tr>
             </thead>
         
@@ -37,13 +39,25 @@ class ItensMonitoramentoView extends View {
                             </button>
                             <div id="oficioDefesaView${n.id}"></div>
                         </td>
+                        <td>
+                            <button disabled class="btn btn-secondary text-center" onclick="itemMonitoramentoController.gerarOficioRegularidade(${n.id})">
+                                Gerar
+                            </button>
+                            <div id="oficioRegularidadeView${n.id}"></div>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary text-center" onclick="itemMonitoramentoController.gerarRelatorioRegularidade(${n.id})">
+                                Gerar
+                            </button>
+                            <div id="relatorioRegularidadeView${n.id}"></div>
+                        </td>                                                
                     </tr>
                     
                 `).join('')}                
             </tbody>
                   
             <tfoot>
-                <td colspan="5" align="center">
+                <td colspan="7" align="center">
                     ${model.itensMonitoramento.reduce((total, n) => total + 1, 0.0)} itens
                 </td>
             </tfoot>
